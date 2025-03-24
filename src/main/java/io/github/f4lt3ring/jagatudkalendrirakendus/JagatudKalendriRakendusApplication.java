@@ -1,0 +1,13 @@
+package io.github.f4lt3ring.jagatudkalendrirakendus;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class JagatudKalendriRakendusApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(JagatudKalendriRakendusApplication.class, args);
+    }
+
+}
