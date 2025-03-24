@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JagatudKalendriRakendusApplication {
 
     public static void main(String[] args) {
+        System.out.println("S'all good man");
         SpringApplication.run(JagatudKalendriRakendusApplication.class, args);
     }
-
 }
