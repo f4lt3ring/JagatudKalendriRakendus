@@ -6,8 +6,10 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Kalender {
-    @Id @GeneratedValue()
+    @Id @GeneratedValue
     private Long id;
+
+    public Kalender() {}
 
     public void setId(Long id) {
         this.id = id;
@@ -16,4 +18,5 @@ public class Kalender {
     public Long getId() {
         return id;
     }
+
 }
