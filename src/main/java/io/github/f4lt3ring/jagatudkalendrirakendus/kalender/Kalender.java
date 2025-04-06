@@ -15,13 +15,11 @@ import java.io.IOException;
 public class Kalender {
     @Id @GeneratedValue
     private Long id;
-    private Calendar icalCalendar;
+    // Loob uue *.ics kalendri põhja
+    private Calendar icalCalendar= new Calendar().withProdId("-//"+id+"//iCal4j 1.0//EN")
+            .withDefaults().getFluentTarget();
 
-    public Kalender() {
-        // Loob uue *.ics kalendri põhja
-        Calendar icalCalendar = new Calendar().withProdId("-//"+id+"//iCal4j 1.0//EN")
-                .withDefaults().getFluentTarget();
-    }
+    public Kalender() {}
 
     public void setId(Long id) {
         this.id = id;
