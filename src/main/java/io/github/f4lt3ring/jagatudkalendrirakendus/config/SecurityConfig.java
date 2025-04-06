@@ -22,6 +22,7 @@ public class SecurityConfig {
   @Bean
   public UserDetailsService userDetailsService(PasswordEncoder encoder) {
 
+    // Reaalsuses siin oleks andmebaasist tulenev info
     UserDetails admin = User.withUsername("admin")
         .password(encoder.encode("bigAdmin"))
         .roles("ADMIN", "USER")
@@ -38,11 +39,10 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
-        .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/auth/welcome").permitAll()
             .requestMatchers("/auth/user/**").authenticated()
-            .requestMatchers("/auth/admin/**").authenticated()
+            .requestMatchers("/auth/admin/**").hasRole("ADMIN")
         )
         .formLogin(withDefaults());
     return http.build();
