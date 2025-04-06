@@ -1,7 +1,9 @@
-package io.github.f4lt3ring.jagatudkalendrirakendus.config;
+package io.github.f4lt3ring.jagatudkalendrirakendus.security.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,12 +19,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig {
+@AllArgsConstructor
+public class WebSecurityConfig {
+
+  private final AppUserService appUserService;
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Bean
   public UserDetailsService userDetailsService(PasswordEncoder encoder) {
 
-    // Reaalsuses siin oleks andmebaasist tulenev info
+    // Reaalsuses siin on andmebaasist tulenev info aga hetkel tesimiseks need
     UserDetails admin = User.withUsername("admin")
         .password(encoder.encode("bigAdmin"))
         .roles("ADMIN", "USER")
@@ -39,17 +45,21 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
+        .csrf(csrf -> csrf.disable())
+        .authenticationProvider(daoAuthenticationProvider())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/auth/welcome").permitAll()
-            .requestMatchers("/auth/user/**").authenticated()
-            .requestMatchers("/auth/admin/**").hasRole("ADMIN")
+            .requestMatchers("/api/v*/registration/**").permitAll()
+            .anyRequest().authenticated()
         )
         .formLogin(withDefaults());
     return http.build();
   }
 
   @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
+  public DaoAuthenticationProvider daoAuthenticationProvider() {
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    provider.setPasswordEncoder(bCryptPasswordEncoder);
+    provider.setUserDetailsService(appUserService);
+    return provider;
   }
 }
