@@ -3,8 +3,12 @@ package io.github.f4lt3ring.jagatudkalendrirakendus.kalender;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VEvent;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 @Entity
@@ -42,6 +46,18 @@ public class Kalender {
         VEvent newAllDayEvent = new VEvent(calendarEventStart.getTime().toInstant(), eventName);
 
         icalCalendar.add(newAllDayEvent);
+    }
+
+    /**
+     * Loob .ics faili mida saab kasutada kõikides seda kasutavates rakendustes
+     * @param filename - faili nimi
+     * @throws IOException
+     */
+    public void generateCalenderFile(String filename) throws IOException {
+        FileOutputStream fout = new FileOutputStream(filename + ".ics");
+
+        CalendarOutputter outputter = new CalendarOutputter();
+        outputter.output(icalCalendar, fout);
     }
 
 }
