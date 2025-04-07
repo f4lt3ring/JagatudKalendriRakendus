@@ -1,5 +1,6 @@
 package io.github.f4lt3ring.jagatudkalendrirakendus.user;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import java.util.Collections;
 
 @Getter
 @Setter
+@Entity
 public class AppUser implements UserDetails {
 
     @Id
@@ -28,6 +30,10 @@ public class AppUser implements UserDetails {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public AppUser() {
+        return;
     }
 
     @Override

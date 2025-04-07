@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class UserController {
 
-  @GetMapping("/welcome")
-  public String welcome() {
-    return "Welcome, this endpoint is not secure";
-  }
+    @GetMapping("/welcome")
+    public String welcome() {
+        return "Welcome, this endpoint is not secure";
+    }
 
-  @GetMapping("/user/userProfile")
-  @PreAuthorize("hasRole('USER')")
-  public String userProfile() {
-    return "Welcome to User Profile";
-  }
+    @GetMapping("/user/userProfile")
+    @PreAuthorize("hasRole('USER')")
+    public String userProfile() {
+        return "Welcome to User Profile";
+    }
 
-  @GetMapping("/admin/adminProfile")
-  @PreAuthorize("hasRole('ADMIN')")
-  public String adminProfile() {
-    return "Welcome to Admin Profile";
-  }
+    @GetMapping("/admin/adminProfile")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String adminProfile() {
+        return "Welcome to Admin Profile";
+    }
 }
