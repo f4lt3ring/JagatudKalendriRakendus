@@ -9,3 +9,9 @@ Esimese etappi põhifookus oli mõista ja õppida kasutama *springbooti*.
 
 Esimesed kaks nädalat igaüks võttis iseseisvalt läbi vajaliku materjali põhitõdede kohta. Õppeperioodi lõpuks moodustasime plaani, kuidas meie süsteem võiks töötada ning mille kallal keegi töötab. Etapi lõpuks oli eesmärk saada valmis andmebaas kuhu erinevaid kalendreid saaks salvestada. Lisaks esmane funktsionaalsus kalendri klassi - võimalus luua kalendrit, lisada üritusi ning saada programmis kätte muudetud *.ics fail.
 Teise etapi eesmärk on valmis saada vähima vajaliku funktsionaalsusega programm, mida saaks klient kasutada.
+
+Kasutusjuhend: \
+* docker-compose down -v (vajalikud andmebaasi andmed uuesti seadistada (vajadusel))
+* docker-compose up --build (konteinerite käivitamine)
+* docker ps (konteinerite kontrollimine)
+* docker exec -it jagatudkalendrirakendus-db-1 psql -U admin -d registration (andmebaasi kontrollimine)

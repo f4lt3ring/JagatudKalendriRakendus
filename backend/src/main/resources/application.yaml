@@ -2,9 +2,9 @@ spring:
   application:
     name: kalender
   datasource:
-    password: bigAdmin
     url: jdbc:postgresql://localhost:5432/registration
     username: admin
+    password: bigAdmin
   jpa:
     hibernate:
       ddl-auto: create-drop

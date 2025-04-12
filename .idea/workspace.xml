@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="237efbf5-8735-41fb-87d1-bd4256621052" name="Changes" comment="move backend to /backend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +46,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Maven. [clean,package].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -62,6 +64,11 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kaurhuko\Documents\Informaatika\Semester2\OOP\JagatudKalendriRakendus\backend" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean package" />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="JagatudKalendriRakendusApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -92,6 +99,8 @@
       <workItem from="1744014010518" duration="286000" />
       <workItem from="1744375289872" duration="981000" />
       <workItem from="1744461289526" duration="264000" />
+      <workItem from="1744466939566" duration="1341000" />
+      <workItem from="1744468985543" duration="2039000" />
     </task>
     <task id="LOCAL-00001" summary="ok undo that">
       <option name="closed" value="true" />
