@@ -17,19 +17,20 @@ import java.util.Collections;
 @Entity
 public class AppUser implements UserDetails {
 
+
     @Id
     @GeneratedValue
     private Long id;
     private String email;
     private String username;
     private String password;
-    private AppUserRole role;
+    private AppUserRole appUserRole;
 
     public AppUser(String email, String username, String password, AppUserRole role) {
         this.email = email;
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.appUserRole = role;
     }
 
     public AppUser() {
@@ -38,7 +39,6 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
+        return Collections.singletonList(new SimpleGrantedAuthority(appUserRole.name()));
     }
-
 }

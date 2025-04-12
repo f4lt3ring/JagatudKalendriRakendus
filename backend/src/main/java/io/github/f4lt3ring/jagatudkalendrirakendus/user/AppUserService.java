@@ -1,5 +1,7 @@
 package io.github.f4lt3ring.jagatudkalendrirakendus.user;
 
+import io.github.f4lt3ring.jagatudkalendrirakendus.registration.token.ConfirmationToken;
+import io.github.f4lt3ring.jagatudkalendrirakendus.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,7 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +19,7 @@ public class AppUserService implements UserDetailsService {
 
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmationTokenService confirmationTokenService;
 
     public String signUpUser(AppUser appUser) {
 
@@ -29,9 +34,17 @@ public class AppUserService implements UserDetailsService {
 
         appUserRepository.save(appUser);
 
-        // TODO: Send confirmation token
+        String token = UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                appUser
+        );
 
-        return "It works";
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+        return token;
     }
 
     @Override
