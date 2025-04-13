@@ -3,15 +3,19 @@ package io.github.f4lt3ring.jagatudkalendrirakendus.kalender;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.CalendarOutputter;
+import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Uid;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -69,6 +73,48 @@ public class Kalender {
         newNormalEvent.getProperties().add(uid);
 
         icalCalendar.getComponents().add(newNormalEvent);
+    }
+
+    public void deleteEvent(Uid uidToDelete, String icsPath) throws ParserException, IOException {
+        VEvent eventToRemove = getEvent(uidToDelete, icsPath);
+        if (eventToRemove != null) {
+            icalCalendar.getComponents().remove(eventToRemove);
+            System.out.println("Event with UID " + uidToDelete + " removed.");
+        } else {
+            System.out.println("Event with UID " + uidToDelete + " not found.");
+        }
+
+    }
+
+    private VEvent getEvent(Uid uidToGet, String icsPath) throws ParserException, IOException {
+        try(InputStream fin = new FileInputStream(icsPath)) {
+            CalendarBuilder builder = new CalendarBuilder();
+            Calendar calendar = builder.build(fin);
+
+            VEvent eventToGet = null;
+            for (Object component : calendar.getComponents("VEVENT")) {
+                VEvent event = (VEvent) component;
+                Uid uid = event.getUid();
+                if (uid != null && uid.getValue().equals(uidToGet.getValue())) {
+                    eventToGet = event;
+                    break;
+                }
+            }
+            return eventToGet;
+        }
+    }
+
+    public void changeEvent(Uid uidToChange, String icsPath, LocalDateTime newEventDate, Duration duration) throws ParserException, IOException {
+
+        VEvent eventToChange = getEvent(uidToChange, icsPath);
+        if (eventToChange != null) {
+            createNormalEvent(eventToChange.getName(), newEventDate, duration);
+            deleteEvent(uidToChange, icsPath);
+        } else {
+            System.out.println("No event to change");
+        }
+
+
     }
     /**
      * Loob .ics faili mida saab kasutada kõikides seda kasutavates rakendustes
