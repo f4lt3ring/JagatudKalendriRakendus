@@ -15,8 +15,8 @@ Kasutusjuhend: \
 * docker-compose up --build (konteinerite käivitamine)
 * docker ps (konteinerite kontrollimine)
 * docker exec -it jagatudkalendrirakendus-db-1 psql -U admin -d registration (andmebaasi kontrollimine)
-* inside database use: \dt, SELECT * FROM app_user;, SELECT * FROM confirmation_token;
-* inside Postman use this body at http://localhost:8080/api/v1/registration with headers Content-Type:application/json and Accept:application/json: 
+* kasulikud andmebaasi käsud: \dt, SELECT * FROM app_user;, SELECT * FROM confirmation_token;
+* päringu saatmiseks aadressil http://localhost:8080/api/v1/registration lisades päiste alla Content-Type:application/json ja Accept:application/json: 
   {
     "email": "...",
     "username": "...",
