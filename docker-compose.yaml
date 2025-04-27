@@ -12,7 +12,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/registration
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: bigAdmin
-
   db:
     image: postgres:latest
     restart: always
