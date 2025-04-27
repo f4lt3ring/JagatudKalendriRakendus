@@ -1,11 +1,16 @@
 package io.github.f4lt3ring.jagatudkalendrirakendus.registration;
 
 import io.github.f4lt3ring.jagatudkalendrirakendus.email.EmailSender;
+import io.github.f4lt3ring.jagatudkalendrirakendus.registration.token.ConfirmationToken;
+import io.github.f4lt3ring.jagatudkalendrirakendus.registration.token.ConfirmationTokenService;
 import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUser;
 import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUserRole;
 import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
@@ -14,6 +19,7 @@ public class RegistrationService {
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
     private final EmailSender emailSender;
+    private final ConfirmationTokenService confirmationTokenService;
 
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
@@ -35,6 +41,29 @@ public class RegistrationService {
                 buildEmail(request.getUsername(), link));
 
         return token;
+    }
+
+    @Transactional
+    public String confirmToken(String token) {
+        ConfirmationToken confirmationToken = confirmationTokenService
+                .getToken(token)
+                .orElseThrow(() ->
+                        new IllegalStateException("token not found"));
+
+        if (confirmationToken.getConfirmedAt() != null) {
+            throw new IllegalStateException("email already confirmed");
+        }
+
+        LocalDateTime expiredAt = confirmationToken.getExpiresAt();
+
+        if (expiredAt.isBefore(LocalDateTime.now())) {
+            throw new IllegalStateException("token expired");
+        }
+
+        confirmationTokenService.setConfirmedAt(token);
+        appUserService.enableAppUser(
+                confirmationToken.getAppUser().getEmail());
+        return "confirmed";
     }
 
     private String buildEmail(String name, String link) {
