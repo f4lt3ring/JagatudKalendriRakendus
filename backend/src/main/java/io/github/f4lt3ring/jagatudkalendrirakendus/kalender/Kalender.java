@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
+@Table(name = "calendars")
 public class Kalender {
     @Id @GeneratedValue
     private Long id;
@@ -27,6 +28,14 @@ public class Kalender {
     private String calendarData;
 
     private Calendar icalCalendar;
+
+
+    public Kalender() {
+        this.icalCalendar = new Calendar()
+                .withProdId("-//Default//iCal4j 1.0//EN")
+                .withDefaults()
+                .getFluentTarget();
+    }
 
     /**
      * Laeb kalendri, sõltuvalt sisendist. Kui sisendit ei tule siis loob ise uue kalendri, kuhu saab info salvestada

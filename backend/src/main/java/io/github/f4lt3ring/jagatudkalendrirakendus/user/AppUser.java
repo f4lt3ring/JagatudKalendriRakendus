@@ -3,6 +3,7 @@ package io.github.f4lt3ring.jagatudkalendrirakendus.user;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.Collections;
 @Entity
 @EqualsAndHashCode
 @NoArgsConstructor
+@Table(name = "users")
 public class AppUser implements UserDetails {
 
 
@@ -37,10 +39,6 @@ public class AppUser implements UserDetails {
         this.username = username;
         this.password = password;
         this.appUserRole = role;
-    }
-
-    public AppUser() {
-        return;
     }
 
     @Override
@@ -76,5 +74,9 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

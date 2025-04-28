@@ -20,6 +20,18 @@ public class KalenderController {
         this.repo = repo;
     }
 
+    @PostMapping(path = "/create")
+    public ActionResponse createCalendar() {
+        Kalender kal = new Kalender();
+        repo.save(kal);
+
+        ActionResponse resp = new ActionResponse();
+        resp.setStatus("OK");
+        resp.setMessage("Calendar created");
+        resp.setUid(String.valueOf(kal.getId())); // reuse UID field to send back id
+        return resp;
+    }
+
     @PostMapping("/{id}/events")
     public ActionResponse createEvent(
             @PathVariable Long id,
