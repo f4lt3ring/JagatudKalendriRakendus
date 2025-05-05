@@ -14,21 +14,21 @@ spring:
         format_sql: true
     show-sql: true
   mail:
-    host: localhost
+    host: host.docker.internal
     port: 1025
     username:
     password:
     properties:
       mail:
         smtp:
-          ssl:
-            trust: "*"
-          auth: true
-          starttls:
-            enable: true
-          connectiontimeout: 5000
-          timeout: 3000
-          writetimeout: 5000
+          auth: false
+          starttls.enable: false
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+  logging:
+    level:
+      org.springframework.mail: DEBUG
 
 server:
   error:
