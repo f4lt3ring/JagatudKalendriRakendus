@@ -24,7 +24,7 @@ public class Kalender {
     @Id @GeneratedValue
     private Long id;
 
-    @Lob
+
     private String calendarData;
 
     private Calendar icalCalendar;

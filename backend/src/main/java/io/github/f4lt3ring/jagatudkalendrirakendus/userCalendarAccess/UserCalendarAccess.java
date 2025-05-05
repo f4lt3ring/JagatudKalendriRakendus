@@ -15,7 +15,7 @@ public class UserCalendarAccess {
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "calendar_id", nullable = false)
     private Kalender calendar;
 

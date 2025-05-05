@@ -4,6 +4,7 @@ import io.github.f4lt3ring.jagatudkalendrirakendus.kalender.Kalender;
 import io.github.f4lt3ring.jagatudkalendrirakendus.kalender.KalenderRepository;
 import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUser;
 import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,7 @@ public class UserCalendarAccessService {
     }
 
     // Rea kustutamine ehk võtame kliendil ligipääsu ära
+    @Transactional
     public void revokeAccess(Long userId, Long calendarId) {
         accessRepository.deleteByUserIdAndCalendarId(userId, calendarId);
     }
