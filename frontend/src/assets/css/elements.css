@@ -1,0 +1,16 @@
+@import './base.css';
+
+.text-input {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    
+    border-color: var(--color-border);
+
+    height: 2rem;
+    border-radius: 0.5rem;
+    border-width: 2px;
+}
+
+.text-input:active {
+    border-color: var(--color-border-hover);
+}
