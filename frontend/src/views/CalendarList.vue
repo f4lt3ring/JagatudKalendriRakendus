@@ -3,7 +3,7 @@ import Calendar from '../components/Calendar.vue'
 </script>
 
 <template>
-  <main>
-    <Calendar />
-  </main>
+    <main>
+        Waddup
+    </main>
 </template>
