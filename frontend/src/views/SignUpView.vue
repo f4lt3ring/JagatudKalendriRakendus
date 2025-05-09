@@ -18,7 +18,7 @@ async function submitSignUp() {
     }
 
     try {
-        const response = await fetch(`${apiBase}/registration`, {
+        const response = await fetch(`${apiBase}/api/v1/registration`, {
             method: "POST",
             body: JSON.stringify(body),
             headers: {

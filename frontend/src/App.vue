@@ -10,7 +10,6 @@ import { RouterLink, RouterView } from 'vue-router'
 
             <nav>
                 <RouterLink to="/">Calendars</RouterLink>
-                <RouterLink to="/calendar">Calendar</RouterLink>
                 <RouterLink to="/signup">Sign Up</RouterLink>
             </nav>
 

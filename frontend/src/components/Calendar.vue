@@ -3,17 +3,26 @@
 import ICAL from "ical.js";
 import VueCal from 'vue-cal';
 import 'vue-cal/dist/vuecal.css';
-import { onMounted, ref } from "vue";
+import { onMounted, ref, type Ref } from "vue";
 
-const calendarEvents = ref([]);
+const apiBase = import.meta.env.VITE_BASE_URL;
+const props = defineProps({
+    id: String
+});
+
+const calendarEvents: Ref<any[]> = ref([]);
 
 onMounted(() => {
     createCalendar();
 });
 
-function createCalendar() {
-    fetch("/test-calendar.ics").then(res => res.text()).then(icsData => {
-        const calendar = new ICAL.Component(ICAL.parse(icsData));
+async function createCalendar() {
+
+    try {
+        const response = await fetch(`${apiBase}/calendar/${props.id}/download`);
+        const ics = await response.text();
+
+        const calendar = new ICAL.Component(ICAL.parse(ics));
         const vevents = calendar.getAllSubcomponents("vevent");
 
         calendarEvents.value = vevents.map(vevent => {
@@ -24,7 +33,13 @@ function createCalendar() {
                 end: event.endDate.toJSDate()
             }
         })
-    })
+
+        console.log(JSON.stringify(vevents));
+
+    } catch (error) {
+        console.error(error);
+    }
+
 }
 
 </script>

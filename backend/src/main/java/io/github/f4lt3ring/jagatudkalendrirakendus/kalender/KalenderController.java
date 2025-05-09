@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/calendar")
@@ -96,9 +97,16 @@ public class KalenderController {
 
     @GetMapping("/{id}/download")
     public byte[] downloadCalendar(@PathVariable Long id) throws IOException {
+        System.out.println("You tried ⭐");
         Kalender kal = repo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Calendar not found"));
 
         return kal.generateCalendarBytes();
     }
+
+    @GetMapping("/list-calendars")
+    public List<Long> listCalendars() {
+        return repo.findAllIds();
+    }
+
 }
