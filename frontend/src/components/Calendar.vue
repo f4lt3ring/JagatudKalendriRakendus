@@ -68,8 +68,10 @@ async function displayCalendar() {
 
 const createEvent = async ({ event, resolve }) => {
 
+    const title = "epic";
+
     const eventDTO = {
-        eventName: event.title,
+        eventName: title,
         eventStart: dateToLdtString(event.start),
         duration: getDurationString(event.start, event.end)
     }
@@ -86,13 +88,14 @@ const createEvent = async ({ event, resolve }) => {
         },
     });
 
-    console.log(response)
+    console.log(response);
 
+    if (!response.ok) return;
 
     resolve({
         ...event,
-        title: 'New Event! 🎉'
-    })
+        title: title
+    });
 }
 
 const tryDelete = async ({ event }) => {

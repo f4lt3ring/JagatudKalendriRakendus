@@ -24,9 +24,10 @@ public class Kalender {
     @Id @GeneratedValue
     private Long id;
 
-
+    @Column(columnDefinition = "TEXT")
     private String calendarData;
 
+    @Transient
     private Calendar icalCalendar;
 
 
@@ -74,6 +75,7 @@ public class Kalender {
     public byte[] generateCalendarBytes() throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         new CalendarOutputter().output(icalCalendar, bos);
+        System.out.println("234 " + icalCalendar.toString());
         return bos.toByteArray();
     }
 
@@ -111,6 +113,8 @@ public class Kalender {
         newNormalEvent.getProperties().add(uid);
 
         icalCalendar.getComponents().add(newNormalEvent);
+        System.out.println("123" + icalCalendar.toString());
+        saveCalendarData();
         return uid;
     }
 
