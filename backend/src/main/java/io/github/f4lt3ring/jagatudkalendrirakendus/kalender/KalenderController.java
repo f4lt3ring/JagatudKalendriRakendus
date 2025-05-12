@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -38,8 +39,10 @@ public class KalenderController {
             @PathVariable Long id,
             @RequestBody EventDTO dto
     ) {
+        System.out.println("Trying to create event 1");
         Kalender kal = repo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Calendar not found"));
+        System.out.println("Trying to create event 2");
 
         Uid uid;
         // Kontroll kas on terve päeva üritus
@@ -48,8 +51,12 @@ public class KalenderController {
         } else {
             uid = kal.createNormalEvent(dto.getEventName(), dto.getEventStart(), dto.getDuration());
         }
+        System.out.println("Trying to create event 3");
+        System.out.println(dto.getEventName() + " " + dto.getEventStart() + " " + dto.getDuration());
+        System.out.println(Duration.parse("PT2H30M0S"));
 
         repo.save(kal);
+        System.out.println("Trying to create event 4");
 
         ActionResponse resp = new ActionResponse();
         resp.setStatus("OK");
@@ -97,7 +104,6 @@ public class KalenderController {
 
     @GetMapping("/{id}/download")
     public byte[] downloadCalendar(@PathVariable Long id) throws IOException {
-        System.out.println("You tried ⭐");
         Kalender kal = repo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Calendar not found"));
 

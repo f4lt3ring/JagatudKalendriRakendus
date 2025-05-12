@@ -9,8 +9,8 @@ services:
     depends_on:
       - backend
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - ./frontend:/app:cached
+      - frontend_node_modules:/app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: npm run dev -- --host
@@ -26,6 +26,9 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/registration
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: bigAdmin
+    volumes:
+      - ./src:/app/src
+      - ./target/classes:/app/target/classes
   db:
     image: postgres:latest
     restart: always
@@ -35,8 +38,7 @@ services:
       POSTGRES_DB: registration
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: bigAdmin
-    volumes:
-      - pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:
+  frontend_node_modules:

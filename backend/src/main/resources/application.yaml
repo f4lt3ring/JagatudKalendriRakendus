@@ -29,6 +29,11 @@ spring:
   logging:
     level:
       org.springframework.mail: DEBUG
+  devtools:
+    livereload:
+      enabled: false
+    restart:
+      enabled: true
 
 server:
   error:
