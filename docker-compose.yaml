@@ -22,6 +22,7 @@ services:
       - "8080:8080"
     depends_on:
       - db
+      - maildev
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/registration
       SPRING_DATASOURCE_USERNAME: admin
@@ -29,6 +30,13 @@ services:
     volumes:
       - ./src:/app/src
       - ./target/classes:/app/target/classes
+  
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
   db:
     image: postgres:latest
     restart: always
