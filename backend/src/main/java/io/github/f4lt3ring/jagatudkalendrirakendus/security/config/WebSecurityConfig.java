@@ -50,13 +50,21 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .httpBasic(AbstractHttpConfigurer::disable);
+        /*
+        http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v*/registration/**").permitAll()
+                        .requestMatchers("/api/v1/registration/**").permitAll()
+                        .requestMatchers("/calendar/**").permitAll()
+                        .requestMatchers("/access/**").permitAll()
                         .requestMatchers("/calendar/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
+        */
         return http.build();
     }
 
@@ -67,4 +75,5 @@ public class WebSecurityConfig {
         provider.setUserDetailsService(appUserService);
         return provider;
     }
+
 }

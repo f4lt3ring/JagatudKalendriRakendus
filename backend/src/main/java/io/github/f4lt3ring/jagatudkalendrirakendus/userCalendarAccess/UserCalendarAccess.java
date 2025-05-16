@@ -4,6 +4,10 @@ import io.github.f4lt3ring.jagatudkalendrirakendus.kalender.Kalender;
 import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUser;
 import jakarta.persistence.*;
 
+/**
+ * Klass vahetabeli jaoks, et seostada kasutajad nende enda kalendritega. Kui tabelis leidub sissekanne kasuta ja kalendri
+ * id-ga siis saame kinnitada, et kasutajal on ligipääs sellele kindlale kalendrile
+ */
 @Entity
 @Table(name = "user_calendar_access")
 public class UserCalendarAccess {

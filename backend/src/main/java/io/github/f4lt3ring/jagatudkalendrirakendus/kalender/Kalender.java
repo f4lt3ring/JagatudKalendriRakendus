@@ -17,7 +17,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 
-
+/**
+ * Kalendri olem, milles leidub kalendri info ning millel on meetodid, et luua, muuta ja kustudada üritusi. Lisaks
+ * salvestada kalender *.ics failina
+ */
 @Entity
 @Table(name = "calendars")
 public class Kalender {
@@ -118,6 +121,7 @@ public class Kalender {
         return uid;
     }
 
+    // Kustutab eventi
     public void deleteEvent(Uid uidToDelete) {
         VEvent eventToRemove = getEvent(uidToDelete);
         if (eventToRemove != null) {
@@ -128,6 +132,11 @@ public class Kalender {
         }
     }
 
+    /**
+     * Abimeetod, mida kasutatkse ürituse muutmisel või kustutamisel. Sellega saab kätte vajaliku ürituse kalendrist
+     * @param uidToGet - ürituse id
+     * @return - tagastab otsitud kalendri eventi
+     */
     private VEvent getEvent(Uid uidToGet) {
         for (CalendarComponent comp : icalCalendar.getComponents("VEVENT")) {
             VEvent eventToGet = (VEvent) comp;
@@ -138,6 +147,7 @@ public class Kalender {
         return null;
     }
 
+    // Eventi aja muutmise meetod
     public void changeEvent(Uid uidToChange, LocalDateTime newEventDate, Duration duration) {
 
         VEvent eventToChange = getEvent(uidToChange);
