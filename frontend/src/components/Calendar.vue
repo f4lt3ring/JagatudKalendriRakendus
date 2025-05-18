@@ -68,7 +68,7 @@ async function displayCalendar() {
 
 const createEvent = async ({ event, resolve }) => {
 
-    const title = "epic";
+    const title = "Uus sündmus";
 
     const eventDTO = {
         eventName: title,

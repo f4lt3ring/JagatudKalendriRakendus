@@ -38,13 +38,12 @@ async function createCalendar() {
 <template>
 
     <div>
-        All calendars:
 
         <li v-for="calendarId in calendarList">
-            <RouterLink :to="`/calendar/${calendarId}`">Calendar {{ calendarId }}</RouterLink>
+            <RouterLink :to="`/calendar/${calendarId}`">Kalender {{ calendarId }}</RouterLink>
         </li>
 
-        <button v-on:click="createCalendar">+ Calendar</button>
+        <button v-on:click="createCalendar">Loo kalender</button>
     </div>
 
 </template>

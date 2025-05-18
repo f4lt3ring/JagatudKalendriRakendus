@@ -36,11 +36,11 @@ async function submitLogin() {
 
 <template>
     <div class="about">
-        <h1>Log In</h1>
+        <h1>Logi sisse</h1>
 
         <form class="sign-up-form">
             <input v-model="email" class="text-input email" type="email" placeholder="Meiliaadress">
-            <input v-model="password" class="text-input password" type="password" placeholder="Password">
+            <input v-model="password" class="text-input password" type="password" placeholder="Parool">
             <button class="text-input" type="button" @click="submitLogin">Logi sisse</button>
         </form>
 

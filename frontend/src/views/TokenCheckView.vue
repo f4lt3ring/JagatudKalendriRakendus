@@ -32,7 +32,7 @@ async function submitToken() {
 
 <template>
     <div class="about">
-        <h1>Token check</h1>
+        <h1>Tookeni kontroll</h1>
 
         <form class="sign-up-form">
             <input v-model="token" class="text-input token" type="token" placeholder="Tooken">

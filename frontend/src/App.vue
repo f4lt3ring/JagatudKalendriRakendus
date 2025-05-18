@@ -4,15 +4,13 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
     <header>
-        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
         <div class="wrapper">
 
             <nav>
-                <RouterLink to="/">Calendars</RouterLink>
-                <RouterLink to="/signup">Sign Up</RouterLink>
-                <RouterLink to="/login">Log In</RouterLink>
-                <RouterLink to="/token">Check Token</RouterLink>
+                <RouterLink to="/">Kalendrid</RouterLink>
+                <RouterLink to="/signup">Loo Konto</RouterLink>
+                <RouterLink to="/login">Logi Sisse</RouterLink>
+                <RouterLink to="/token">Tookeni Kontroll</RouterLink>
             </nav>
 
         </div>
