@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,12 +17,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 @AllArgsConstructor
+
+/*
+ * Vastutab veebilehe turvalisuse eest.
+ */
 public class WebSecurityConfig {
 
     private final AppUserService appUserService;
@@ -32,13 +33,12 @@ public class WebSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
 
-        // Reaalsuses siin on andmebaasist tulenev info aga hetkel tesimiseks need
         UserDetails admin = User.withUsername("admin")
                 .password(encoder.encode("bigAdmin"))
                 .roles("ADMIN", "USER")
                 .build();
 
-        UserDetails user = User.withUsername("Ahti")
+        UserDetails user = User.withUsername("user")
                 .password(encoder.encode("123"))
                 .roles("USER")
                 .build();

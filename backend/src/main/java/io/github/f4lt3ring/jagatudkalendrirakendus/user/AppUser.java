@@ -21,8 +21,10 @@ import java.util.Collections;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Table(name = "users")
+/*
+ * Kasutaja klass kõigi vajalike parameetritega. Vajalik uue kasutaja loomisel.
+ */
 public class AppUser implements UserDetails {
-
 
     @Id
     @GeneratedValue

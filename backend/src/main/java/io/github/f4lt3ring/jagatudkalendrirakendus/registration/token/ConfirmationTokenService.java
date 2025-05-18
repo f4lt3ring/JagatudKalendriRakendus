@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * Hoolitseb meili kinnitustokeni toimingute eest.
+ */
 @Service
 @AllArgsConstructor
 public class ConfirmationTokenService {
