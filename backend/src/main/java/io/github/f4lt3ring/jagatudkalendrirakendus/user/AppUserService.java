@@ -15,6 +15,9 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+/*
+ * Vastutab kasutajate registreerimise ja autentimise eest.
+ */
 public class AppUserService implements UserDetailsService {
 
     private final AppUserRepository appUserRepository;

@@ -10,6 +10,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+/**
+ * EmailService klass, et saata arendusmeeskonnalt kasutajale lingi konto kinnitamiseks.
+ */
 @Service
 @AllArgsConstructor
 public class EmailService implements EmailSender{

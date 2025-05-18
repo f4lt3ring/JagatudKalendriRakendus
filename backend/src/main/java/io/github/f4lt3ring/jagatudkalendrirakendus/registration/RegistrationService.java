@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
+/**
+ * Kasutaja konto loomise klass. Kasutab unikaalset confirmation tokenit iga registreeringu kohta.
+ */
 @Service
 @AllArgsConstructor
 public class RegistrationService {
@@ -36,9 +39,9 @@ public class RegistrationService {
         );
 
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
-        emailSender.send(
-                request.getEmail(),
-                buildEmail(request.getUsername(), link));
+        //emailSender.send(
+        //        request.getEmail(),
+        //        buildEmail(request.getUsername(), link));
 
         return token;
     }
@@ -66,6 +69,9 @@ public class RegistrationService {
         return "confirmed";
     }
 
+    /**
+     * Kirja mall, mille põhjal luuakse kinnitusmeil.
+     */
     private String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +

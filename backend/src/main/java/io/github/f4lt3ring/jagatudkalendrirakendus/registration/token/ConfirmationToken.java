@@ -13,7 +13,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 
+/*
+ * Talletab tokeni sõne, kehtivus‐ ja kinnitustähtajad ning seob tokeni kasutajaga.
+ */
 public class ConfirmationToken {
+
+    public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiredAt, AppUser appUser) {
+        this.token = token;
+        this.createdAt = createdAt;
+        this.expiresAt = expiredAt;
+        this.appUser = appUser;
+    }
 
     @SequenceGenerator(
             name = "user_sequence",
@@ -45,11 +55,4 @@ public class ConfirmationToken {
             name = "app_user_id"
     )
     private AppUser appUser;
-
-    public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiredAt, AppUser appUser) {
-        this.token = token;
-        this.createdAt = createdAt;
-        this.expiresAt = expiredAt;
-        this.appUser = appUser;
-    }
 }

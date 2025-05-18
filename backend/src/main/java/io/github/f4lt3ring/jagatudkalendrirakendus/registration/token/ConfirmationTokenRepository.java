@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * Koondab kõik püsivad operatsioonid e-posti kinnitustokeni kohta.
+ */
 @Repository
 @Transactional(readOnly = true)
 public interface ConfirmationTokenRepository

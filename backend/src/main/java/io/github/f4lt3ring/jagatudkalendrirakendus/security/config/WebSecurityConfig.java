@@ -53,7 +53,6 @@ public class WebSecurityConfig {
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v*/registration/**").permitAll()
-                        .requestMatchers("/api/v*/login/**").permitAll()
                         .requestMatchers("/calendar/**").permitAll()
                         .anyRequest().authenticated()
                 )

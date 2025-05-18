@@ -4,6 +4,9 @@ package io.github.f4lt3ring.jagatudkalendrirakendus.DTO;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+/**
+ * DTO, et saaks saata vajaliku infot kalendris uue eventi loomisel
+ */
 public class EventDTO {
     private String eventName;
     private LocalDateTime eventStart;

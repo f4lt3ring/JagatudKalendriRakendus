@@ -1,5 +1,9 @@
 package io.github.f4lt3ring.jagatudkalendrirakendus.DTO;
 
+
+/**
+ * Data Transfer Object, et KalenderController klassis saaks saata ning kätte saada vajalike infot peale igasugust toimingut
+ */
 public class ActionResponse {
     private String status;
     private String message;
