@@ -26,7 +26,7 @@ public class Kalender {
 
     @Column(columnDefinition = "TEXT")
     private String calendarData;
- 
+
     @Transient
     private Calendar icalCalendar;
 

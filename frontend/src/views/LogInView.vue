@@ -4,21 +4,19 @@ import { ref } from 'vue'
 const apiBase = import.meta.env.VITE_BASE_URL;
 
 const email = ref("")
-const username = ref("")
 const password = ref("")
 
 const responseRef = ref("")
 
-async function submitSignUp() {
+async function submitLogin() {
 
     const body = {
         email: email.value,
-        username: username.value,
         password: password.value,
     }
 
     try {
-        const response = await fetch(`${apiBase}/api/v1/registration`, {
+        const response = await fetch(`${apiBase}/api/v1/login`, {
             method: "POST",
             body: JSON.stringify(body),
             headers: {
@@ -29,7 +27,6 @@ async function submitSignUp() {
 
         responseRef.value = await response.text();
 
-
     } catch (error) {
         console.error(error);
     }
@@ -39,13 +36,12 @@ async function submitSignUp() {
 
 <template>
     <div class="about">
-        <h1>Sign Up</h1>
+        <h1>Log In</h1>
 
         <form class="sign-up-form">
             <input v-model="email" class="text-input email" type="email" placeholder="Meiliaadress">
-            <input v-model="username" class="text-input username" placeholder="Kasutajanimi">
             <input v-model="password" class="text-input password" type="password" placeholder="Password">
-            <button class="text-input" type="button" @click="submitSignUp">Registreeru</button>
+            <button class="text-input" type="button" @click="submitLogin">Logi sisse</button>
         </form>
 
         <p> {{ responseRef }} </p>

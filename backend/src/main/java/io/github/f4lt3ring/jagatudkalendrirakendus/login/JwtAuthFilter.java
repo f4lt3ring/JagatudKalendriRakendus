@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class JwAuthFilter extends OncePerRequestFilter {
+public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final AppUserRepository appUserRepository;
