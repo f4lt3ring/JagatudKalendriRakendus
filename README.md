@@ -14,15 +14,12 @@ Esimese etappi põhifookus oli mõista ja õppida kasutama *springbooti*.
 Esimesed kaks nädalat igaüks võttis iseseisvalt läbi vajaliku materjali põhitõdede kohta. Õppeperioodi lõpuks moodustasime plaani, kuidas meie süsteem võiks töötada ning mille kallal keegi töötab. Etapi lõpuks oli eesmärk saada valmis andmebaas kuhu erinevaid kalendreid saaks salvestada. Lisaks esmane funktsionaalsus kalendri klassi - võimalus luua kalendrit, lisada üritusi ning saada programmis kätte muudetud *.ics fail.
 Teise etapi eesmärk on valmis saada vähima vajaliku funktsionaalsusega programm, mida saaks klient kasutada.
 
-## Kasutusjuhend: \
-* docker-compose down -v (vajalikud andmebaasi andmed uuesti seadistada (vajadusel))
-* docker-compose up --build (konteinerite käivitamine)
-* docker ps (konteinerite kontrollimine)
-* docker exec -it jagatudkalendrirakendus-db-1 psql -U admin -d registration (andmebaasi kontrollimine)
-* kasulikud andmebaasi käsud: \dt, SELECT * FROM app_user;, SELECT * FROM confirmation_token;
-* päringu saatmiseks aadressil http://localhost:8080/api/v1/registration lisades päiste alla Content-Type:application/json ja Accept:application/json: 
-  {
-    "email": "...",
-    "username": "...",
-    "password": "...",
-    }
+## Jooksutamine:
+
+Eeldab [Docker Desktopi](https://www.docker.com/products/docker-desktop/) olemasolu ja käivitamist.  
+Projekti kaustas käivitada:
+```console
+docker-compose up
+```
+Dockeri käivitumisel on rakendus leitav http://localhost:5173/  
+Meilid on leitavad http://localhost:1080/
