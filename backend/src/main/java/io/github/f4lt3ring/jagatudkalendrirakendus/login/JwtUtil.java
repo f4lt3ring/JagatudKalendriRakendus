@@ -31,21 +31,17 @@ public class JwtUtil {
 
     public Optional<AppUser> extractUserIfValid(AppUserRepository userRepo, String token) {
         try {
-            System.out.println("jeea ");
             String idString = Jwts.parser()
                     .verifyWith(key)
                     .build()
                     .parseSignedClaims(token)
                     .getPayload()
                     .getSubject();
-            System.out.println("jee " + idString);
 
             Long id = Long.parseLong(idString);
-            System.out.println("jee 2");
             return userRepo.findById(id);
 
         } catch (Exception e) {
-            e.printStackTrace();
             return Optional.empty();
         }
     }

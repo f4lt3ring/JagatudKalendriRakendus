@@ -24,8 +24,8 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
-        ResponseEntity<String> invalidCredentials =
-                ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password\n" + appUserRepository.findAll());
+        ResponseEntity<String> invalidCredentials = ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body("Vale meiliaadress või parool.");
 
         Optional<AppUser> appUser = appUserRepository.findByEmail(loginDTO.getEmail());
         if (appUser.isEmpty()) return invalidCredentials;
@@ -40,11 +40,11 @@ public class LoginController {
     public ResponseEntity<?> tokenCheck(@RequestBody String token) {
 
         Optional<AppUser> userOptional = jwtUtil.extractUserIfValid(appUserRepository, token);
-        if (userOptional.isEmpty()) return ResponseEntity.ok("Invalid Token");
+        if (userOptional.isEmpty()) return ResponseEntity.ok("Tooken on kehtetu või aegunud.");
 
         AppUser user = userOptional.get();
 
-        return ResponseEntity.ok("Token belongs to user: " + user.getUsername());
+        return ResponseEntity.ok("Tooken kuulub kasutajale nimega " + user.getUsername() + ".");
     }
 
 

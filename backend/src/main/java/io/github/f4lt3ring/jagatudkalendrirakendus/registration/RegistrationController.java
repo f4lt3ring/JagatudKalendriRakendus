@@ -1,6 +1,7 @@
 package io.github.f4lt3ring.jagatudkalendrirakendus.registration;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -17,7 +18,7 @@ public class RegistrationController {
      * Loob uue kasutaja ning saadab kinnitustokeni e-postiga.
      */
     @PostMapping
-    public String register(@RequestBody RegistrationRequest request) {
+    public ResponseEntity<?> register(@RequestBody RegistrationRequest request) {
         return registrationService.register(request);
     }
 

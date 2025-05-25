@@ -76,9 +76,6 @@ const createEvent = async ({ event, resolve }) => {
         duration: getDurationString(event.start, event.end)
     }
 
-    console.log(eventDTO.eventStart)
-    console.log(eventDTO.duration)
-
     const response = await fetch(`${apiBase}/calendar/${props.id}/events`, {
         method: "POST",
         body: JSON.stringify(eventDTO),
@@ -87,8 +84,6 @@ const createEvent = async ({ event, resolve }) => {
             "Accept": "application/json"
         },
     });
-
-    console.log(response);
 
     if (!response.ok) return;
 

@@ -27,10 +27,10 @@ public class AppUserService implements UserDetailsService {
     public String signUpUser(AppUser appUser) {
 
         boolean emailTaken = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
-        if (emailTaken) throw new IllegalStateException("Email is already taken.");
+        if (emailTaken) throw new IllegalStateException("Meiliaadress on juba kasutuses.");
 
         boolean usernameTaken = appUserRepository.findByUsername(appUser.getUsername()).isPresent();
-        if (usernameTaken) throw new IllegalStateException("Username is already taken.");
+        if (usernameTaken) throw new IllegalStateException("Kasutajanimi on juba kasutuses.");
 
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword);

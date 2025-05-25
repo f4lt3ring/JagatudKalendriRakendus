@@ -7,6 +7,8 @@ import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUser;
 import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUserRole;
 import io.github.f4lt3ring.jagatudkalendrirakendus.user.AppUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,26 +26,37 @@ public class RegistrationService {
     private final EmailSender emailSender;
     private final ConfirmationTokenService confirmationTokenService;
 
-    public String register(RegistrationRequest request) {
+    public ResponseEntity<?> register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
-        if (!isValidEmail) {
-            throw new IllegalStateException("Email not valid");
+        if (!isValidEmail)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Meiliaadress on vales formaadis.");
+
+        String token;
+        try {
+            token = appUserService.signUpUser(
+                    new AppUser(
+                            request.getEmail(),
+                            request.getUsername(),
+                            request.getPassword(),
+                            AppUserRole.USER
+                    )
+            );
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        String token = appUserService.signUpUser(
-            new AppUser(
-                request.getEmail(),
-                request.getUsername(),
-                request.getPassword(),
-                AppUserRole.USER
-            )
-        );
 
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
-        //emailSender.send(
-        //        request.getEmail(),
-        //        buildEmail(request.getUsername(), link));
 
-        return token;
+        try {
+            emailSender.send(
+                    request.getEmail(),
+                    buildEmail(request.getUsername(), link));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Emaili saatmisel tekkis viga.");
+        }
+
+        return ResponseEntity.ok("Aktiveeri konto postkasti kaudu.");
     }
 
     @Transactional

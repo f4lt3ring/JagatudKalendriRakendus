@@ -11,6 +11,8 @@ const responseRef = ref("")
 
 async function submitSignUp() {
 
+    responseRef.value = "...";
+
     const body = {
         email: email.value,
         username: username.value,
@@ -27,8 +29,7 @@ async function submitSignUp() {
             }
         });
 
-        await response.text();
-        responseRef.value = "Aktiveeri konto meili kaudu."
+        responseRef.value = await response.text();
 
 
     } catch (error) {
@@ -44,8 +45,11 @@ async function submitSignUp() {
 
         <form class="sign-up-form">
             <input v-model="email" class="text-input email" type="email" placeholder="Meiliaadress">
+            <br>
             <input v-model="username" class="text-input username" placeholder="Kasutajanimi">
+            <br>
             <input v-model="password" class="text-input password" type="password" placeholder="Parool">
+            <br>
             <button class="text-input" type="button" @click="submitSignUp">Loo Konto</button>
         </form>
 

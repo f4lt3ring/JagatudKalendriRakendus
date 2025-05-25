@@ -36,6 +36,7 @@ async function submitToken() {
 
         <form class="sign-up-form">
             <input v-model="token" class="text-input token" type="token" placeholder="Tooken">
+            <br>
             <button class="text-input" type="button" @click="submitToken">Sisesta tooken</button>
         </form>
 
